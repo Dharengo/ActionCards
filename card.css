@@ -1,0 +1,42 @@
+.card {
+    --blackish: #0f0e0e;
+    --whiteish: #f0ede5;
+    --reddish: #5d0101;
+    --copperish: #cdc08f;
+    --main-text-color: var(--blackish);
+    --background-color: var(--whiteish);
+    --border-color: var(--reddish);
+    --support-color: var(--copperish);
+
+    color: var(--main-text-color);
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    width: 400px;
+    height: 500px;
+}
+
+.card > h1 {
+    color: var(--support-color);
+    background-color: var(--border-color);
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card.skill {
+    --border-color: goldenrod;
+    --support-color: var(--reddish);
+}
+
+.cardname {
+    text-align: left;
+}
+
+.actiontype {
+    text-align: right;
+}
+
+.cardbox {
+    display: flex;
+    flex-wrap: wrap;
+}
