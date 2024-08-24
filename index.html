@@ -12,8 +12,8 @@
                 integrity="sha512-YcsIPGdhPK4P/uRW6/sruonlYj+Q7UHWeKfTAkBW+g83NKM+jMJFJ4iAPfSnVp7BKD4dKMHmVSvICUbE/V1sSw=="
                 crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
-            const openPDF = (source, options, callback) => {
-                html2pdf().set(options).from(source).toPdf().get('pdf').then(function(pdf) {
+            function openPDF(source, options) {
+                html2pdf().set(options).from(source).toPdf().get('pdf').then(pdf => {
                     url = pdf.output('bloburl')
                     window.open(url, '_blank')
                     URL.revokeObjectURL(url)
@@ -23,6 +23,6 @@
         <script type="py" src="main.py" config="config.toml"></script>
     </head>
     <body>
-        <div id="loading" align="center"><h1>Loading The App...</h1></div>
+        <h1 align="center">Loading The App...</h1>
     </body>
 </html>
