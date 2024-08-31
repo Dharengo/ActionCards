@@ -1,5 +1,5 @@
-import ltk
-from utils import *
+from pyscript.web import h1, span  # type: ignore
+from webwidgets import Widget
 
 ACT0 = ' '
 ACT1 = ' '
@@ -7,45 +7,47 @@ ACT2 = ' '
 ACT3 = ' '
 ACTR = ' '
 
-class Card(ltk.Widget):
-    classes = ['card']
 
-    def __init__(self, cls=''):
+class Card(Widget, classes='card'):
+    def __init__(self, *args, **kwargs):
         super().__init__(
-            element('h1').append(
-                span('fullname').append(
-                    span('cardname').text('Card Name'),
-                    span('actioncost').text(ACT1)
-                ),
-                span('actiontype').text('Feat 1')
-            ),
-            'Describe The Action Here'
+            h1(
+                span(
+                    span('Card Name', classes='cardname'),
+                    span(ACT1, classes='actioncost'),
+                    classes='fullname'),
+                span('Feat 1', classes='actiontype')),
+            'Describe The Action Here',
+            *args, **kwargs
         )
-        self.addClass(cls)
 
-    def _getsetvalues(self, selector, value=None):
-        el = self.find(selector)
+    def field(self, selector, value=None):
+        el = self.find(selector)[0]
         if value is None:
-            return el.text()
+            return el.innerText
         else:
-            el.text(value)
+            el.innerText = value
             return self
 
     def name(self, value=None):
-        return self._getsetvalues('.cardname', value)
+        return self.field('.cardname', value)
 
     def atype(self, value=None):
-        return self._getsetvalues('.actiontype', value)
+        return self.field('.actiontype', value)
 
     def actioncost(self, value=None):
-        return self._getsetvalues('.actioncost', value)
+        return self.field('.actioncost', value)
 
-    def reset_class(self):
-        self.element.removeClass()
-        self.addClass(*self.classes)
-        return self
+    def style(self, class_=None):
+        if class_:
+            self.reset_class()
+            self.classes.add(class_)
+            return self
+        else:
+            for class_ in self.classes:
+                if class_ not in self._defaultclasses:
+                    return class_
 
 
-class Trait(ltk.Widget):
-    classes = ['trait']
-    tag = 'span'
+def trait():
+    return span(classes='trait')
