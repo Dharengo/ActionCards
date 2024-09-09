@@ -21,7 +21,7 @@ def _listify(classes):
 def widgetsettings(tag=None, classes=None, classoverride=False):  # Does exactly what the metaclass did
     def deco(cls):
         if not issubclass(cls, Widget):
-            raise TypeError(f'@{widgetsettings} can only be used with subclasses of {Widget}. {cls} is not.')
+            raise TypeError(f'{cls} is not a subclass of {Widget}.')
         if tag:
             cls._tag = tag
         if classes is not None:
