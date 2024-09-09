@@ -1,5 +1,5 @@
 from pyscript.web import h1, span  # type: ignore
-from webwidgets import Widget
+from webwidgets import Widget, widgetsettings
 
 ACT0 = ' '
 ACT1 = ' '
@@ -8,7 +8,8 @@ ACT3 = ' '
 ACTR = ' '
 
 
-class Card(Widget, classes='card'):
+@widgetsettings(classes='card')
+class Card(Widget):
     def __init__(self, *args, **kwargs):
         super().__init__(
             h1(
